@@ -25,7 +25,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User retieveUser(@PathVariable int id) {
-        User user = userService.findOne(id);
+        User user = userService.findById( id);
         if(user==null)
             throw new UserNotFoundException("id-"+id);
         return user;
@@ -35,5 +35,12 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody User user) {
         User savedUser = userService.save(user);
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        User user = userService.deleteById(id);
+        if(user == null)
+            throw new UserNotFoundException("id-"+id);
     }
 }
