@@ -7,6 +7,7 @@ import uk.co.atlantis.rest.webservices.restfulwebservices.exception.UserNotFound
 import uk.co.atlantis.rest.webservices.restfulwebservices.model.User;
 import uk.co.atlantis.rest.webservices.restfulwebservices.services.UserDaoService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@Valid @RequestBody User user) {
         User savedUser = userService.save(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }
